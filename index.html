@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crochet Toy Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fdf6f9;
+    }
+
+    header {
+      background: #ffb6c1;
+      padding: 15px;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff1493;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Crochet Toy Shop 🧸</h1>
+  <p>Order your cute handmade crochet toys!</p>
+</header>
+
+<div class="container">
+
+  <div class="product">
+    <h3>Select Your Toy</h3>
+    <select id="toy">
+      <option>Bear 🐻</option>
+      <option>Bunny 🐰</option>
+      <option>Cat 🐱</option>
+    </select>
+
+    <h3>Choose Size</h3>
+    <select id="size">
+      <option>Small</option>
+      <option>Medium</option>
+      <option>Large</option>
+    </select>
+
+    <h3>Choose Color</h3>
+    <select id="color">
+      <option>Pink</option>
+      <option>White</option>
+      <option>Brown</option>
+    </select>
+  </div>
+
+  <div class="product">
+    <h3>Your Details</h3>
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="text" id="address" placeholder="Your Address" required>
+    <textarea id="notes" placeholder="Additional notes..."></textarea>
+
+    <button onclick="orderNow()">Place Order</button>
+  </div>
+
+</div>
+
+<script>
+function orderNow() {
+  let toy = document.getElementById("toy").value;
+  let size = document.getElementById("size").value;
+  let color = document.getElementById("color").value;
+  let name = document.getElementById("name").value;
+
+  if(name === "") {
+    alert("Please enter your name!");
+    return;
+  }
+
+  alert("Order placed!\n\n" +
+        "Name: " + name +
+        "\nToy: " + toy +
+        "\nSize: " + size +
+        "\nColor: " + color);
+}
+</script>
+
+</body>
+</html>
