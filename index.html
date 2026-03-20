@@ -1,0 +1,90 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crochet Toy Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }header {
+  background: #ffb6c1;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.container {
+  padding: 20px;
+}
+
+.product {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+}
+
+select, button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  background: #ff69b4;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #ff1493;
+}
+
+.order-summary {
+  margin-top: 20px;
+  padding: 15px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  </style>
+</head>
+<body><header>
+  Crochet Toy Shop 🧸
+</header><div class="container">  <div class="product">
+    <h2>Crochet Bear</h2>
+    <p>Select a variation:</p><select id="variation">
+  <option value="Small - ₱150">Small - ₱150</option>
+  <option value="Medium - ₱250">Medium - ₱250</option>
+  <option value="Large - ₱350">Large - ₱350</option>
+</select>
+
+<button onclick="orderNow()">Order Now</button>
+
+  </div>  <div class="order-summary" id="summary" style="display:none;">
+    <h3>Order Summary</h3>
+    <p id="orderDetails"></p>
+  </div></div><script>
+  function orderNow() {
+    const variation = document.getElementById('variation').value;
+    const summary = document.getElementById('summary');
+    const details = document.getElementById('orderDetails');
+
+    details.innerHTML = "You ordered: <b>Crochet Bear</b><br>Variation: " + variation;
+    summary.style.display = "block";
+  }
+</script></body>
+</html>
