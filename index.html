@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crochet Toy Shop</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fdf6f9;
+    }
+
+    header {
+      background: #ffb6c1;
+      padding: 15px;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    .product {
+      background: white;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    }
+
+    select, input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      background: #ff69b4;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff1493;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Crochet Toy Shop 🧸</h1>
+  <p>Order your cute handmade crochet toys!</p>
+</header>
+
+<div class="container">
+
+  <div class="product">
+    <h3>Select Your Toy</h3>
+    <select id="toy">
+      <option>Bear 🐻</option>
+      <option>Bunny 🐰</option>
+      <option>Cat 🐱</option>
+    </select>
+
+    <h3>Choose Size</h3>
+    <select id="size">
+      <option>Small</option>
+      <option>Medium</option>
+      <option>Large</option>
+    </select>
+
+    <h3>Choose Color</h3>
+    <select id="color">
+      <option>Pink</option>
+      <option>White</option>
+      <option>Brown</option>
+    </select>
+  </div>
+
+  <div class="product">
+    <h3>Your Details</h3>
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="text" id="address" placeholder="Your Address" required>
+    <textarea id="notes" placeholder="Additional notes..."></textarea>
+
+    <button onclick="orderNow()">Place Order</button>
+  </div>
+
+</div>
+
+<!-- 🔥 FIREBASE SCRIPT -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+  import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  // ✅ YOUR CONFIG (nilagay ko na)
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZYMNVHcptSb4opfQROW2-gUUuaffX9Fw",
+    authDomain: "crochetshop-dd1bd.firebaseapp.com",
+    projectId: "crochetshop-dd1bd",
+    storageBucket: "crochetshop-dd1bd.firebasestorage.app",
+    messagingSenderId: "1060151558141",
+    appId: "1:1060151558141:web:0faca4ff3eaaed48e46394",
+    measurementId: "G-T85N4LCH5D"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+  window.orderNow = async function() {
+    let toy = document.getElementById("toy").value;
+    let size = document.getElementById("size").value;
+    let color = document.getElementById("color").value;
+    let name = document.getElementById("name").value;
+    let address = document.getElementById("address").value;
+    let notes = document.getElementById("notes").value;
+
+    if(name === "" || address === "") {
+      alert("Please fill all fields!");
+      return;
+    }
+
+    try {
+      await addDoc(collection(db, "orders"), {
+        name: name,
+        address: address,
+        toy: toy,
+        size: size,
+        color: color,
+        notes: notes,
+        date: new Date()
+      });
+
+      alert("✅ Order saved successfully!");
+
+    } catch (error) {
+      alert("❌ Error saving order");
+      console.error(error);
+    }
+  }
+</script>
+
+</body>
+</html>
