@@ -1,156 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Crochet Toy Shop</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #fdf6f9;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crochet Toy Shop</title>
 
-    header {
-      background: #ffb6c1;
-      padding: 15px;
-      text-align: center;
-      color: white;
-    }
+<style>
+body {
+  font-family: Arial;
+  background: #f9f9f9;
+  margin: 0;
+}
 
-    .container {
-      padding: 20px;
-    }
+header {
+  background: #ffb6c1;
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
 
-    .product {
-      background: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    }
+.container {
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
 
-    select, input, textarea {
-      width: 100%;
-      padding: 8px;
-      margin-top: 5px;
-      margin-bottom: 10px;
-    }
+.product {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  width: 250px;
+  text-align: center;
+}
 
-    button {
-      background: #ff69b4;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
+button {
+  margin-top: 10px;
+  padding: 10px;
+  width: 100%;
+  background: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
 
-    button:hover {
-      background: #ff1493;
-    }
-  </style>
+.cart {
+  background: white;
+  padding: 15px;
+  margin: 20px;
+  border-radius: 10px;
+}
+</style>
 </head>
 
 <body>
 
-<header>
-  <h1>Crochet Toy Shop 🧸</h1>
-  <p>Order your cute handmade crochet toys!</p>
-</header>
+<header>🧸 Crochet Toy Shop</header>
 
 <div class="container">
 
   <div class="product">
-    <h3>Select Your Toy</h3>
-    <select id="toy">
-      <option>Bear 🐻</option>
-      <option>Bunny 🐰</option>
-      <option>Cat 🐱</option>
+    <h3>Crochet Bear</h3>
+    <select id="bear">
+      <option value="Small - 150">Small - ₱150</option>
+      <option value="Medium - 250">Medium - ₱250</option>
+      <option value="Large - 350">Large - ₱350</option>
     </select>
-
-    <h3>Choose Size</h3>
-    <select id="size">
-      <option>Small</option>
-      <option>Medium</option>
-      <option>Large</option>
-    </select>
-
-    <h3>Choose Color</h3>
-    <select id="color">
-      <option>Pink</option>
-      <option>White</option>
-      <option>Brown</option>
-    </select>
+    <button onclick="addToCart('Crochet Bear', 'bear')">Add to Cart</button>
   </div>
 
   <div class="product">
-    <h3>Your Details</h3>
-    <input type="text" id="name" placeholder="Your Name" required>
-    <input type="text" id="address" placeholder="Your Address" required>
-    <textarea id="notes" placeholder="Additional notes..."></textarea>
-
-    <button onclick="orderNow()">Place Order</button>
+    <h3>Crochet Bunny</h3>
+    <select id="bunny">
+      <option value="Small - 120">Small - ₱120</option>
+      <option value="Medium - 220">Medium - ₱220</option>
+      <option value="Large - 320">Large - ₱320</option>
+    </select>
+    <button onclick="addToCart('Crochet Bunny', 'bunny')">Add to Cart</button>
   </div>
 
 </div>
 
-<!-- 🔥 FIREBASE SCRIPT -->
+<div class="cart">
+  <h3>🛒 Cart</h3>
+  <ul id="cartList"></ul>
+  <p><b>Total: ₱<span id="total">0</span></b></p>
+
+  <h4>Customer Info</h4>
+  <input type="text" id="name" placeholder="Your Name"><br><br>
+  <input type="text" id="address" placeholder="Address"><br><br>
+
+  <button onclick="placeOrder()">Place Order</button>
+</div>
+
 <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-  import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-  // ✅ YOUR CONFIG (nilagay ko na)
-  const firebaseConfig = {
-    apiKey: "AIzaSyDZYMNVHcptSb4opfQROW2-gUUuaffX9Fw",
-    authDomain: "crochetshop-dd1bd.firebaseapp.com",
-    projectId: "crochetshop-dd1bd",
-    storageBucket: "crochetshop-dd1bd.firebasestorage.app",
-    messagingSenderId: "1060151558141",
-    appId: "1:1060151558141:web:0faca4ff3eaaed48e46394",
-    measurementId: "G-T85N4LCH5D"
-  };
 
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getFirestore(app);
+const firebaseConfig = {
+  apiKey: "AIzaSyDZYMNVHcptSb4opfQROW2-gUUuaffX9Fw",
+  authDomain: "crochetshop-dd1bd.firebaseapp.com",
+  projectId: "crochetshop-dd1bd",
+  storageBucket: "crochetshop-dd1bd.firebasestorage.app",
+  messagingSenderId: "1060151558141",
+  appId: "1:1060151558141:web:0faca4ff3eaaed48e46394",
+  measurementId: "G-T85N4LCH5D"
+};
 
-  window.orderNow = async function() {
-    let toy = document.getElementById("toy").value;
-    let size = document.getElementById("size").value;
-    let color = document.getElementById("color").value;
-    let name = document.getElementById("name").value;
-    let address = document.getElementById("address").value;
-    let notes = document.getElementById("notes").value;
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-    if(name === "" || address === "") {
-      alert("Please fill all fields!");
-      return;
-    }
+let cart = [];
+let total = 0;
 
-    try {
-      await addDoc(collection(db, "orders"), {
-        name: name,
-        address: address,
-        toy: toy,
-        size: size,
-        color: color,
-        notes: notes,
-        date: new Date()
-      });
+window.addToCart = function(product, selectId) {
+  const value = document.getElementById(selectId).value;
+  const [size, price] = value.split(" - ");
 
-      alert("✅ Order saved successfully!");
+  cart.push({ product, size, price: parseInt(price) });
+  total += parseInt(price);
 
-    } catch (error) {
-      alert("❌ Error saving order");
-      console.error(error);
-    }
+  displayCart();
+}
+
+function displayCart() {
+  const list = document.getElementById("cartList");
+  list.innerHTML = "";
+
+  cart.forEach(item => {
+    list.innerHTML += `<li>${item.product} (${item.size}) - ₱${item.price}</li>`;
+  });
+
+  document.getElementById("total").innerText = total;
+}
+
+
+window.placeOrder = async function() {
+  const name = document.getElementById("name").value;
+  const address = document.getElementById("address").value;
+
+  if (!name || !address || cart.length === 0) {
+    alert("Complete your order!");
+    return;
   }
+
+  try {
+    await addDoc(collection(db, "orders"), {
+      name: name,
+      address: address,
+      items: cart,
+      total: total,
+      date: new Date().toString()
+    });
+
+    alert("✅ Order saved!");
+
+    
+    cart = [];
+    total = 0;
+    displayCart();
+    document.getElementById("name").value = "";
+    document.getElementById("address").value = "";
+
+  } catch (error) {
+    alert("❌ Error: " + error);
+    console.log(error);
+  }
+}
 </script>
 
 </body>
-</html>
+</html></html>
