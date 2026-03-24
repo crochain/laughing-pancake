@@ -1,104 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crochet Toy Shop</title>
+  <meta charset="UTF-8">
+  <title>KNOTIQUE 🧶</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f7f3f0;
+    }
+    header {
+      background: #e68bbe;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      background: #f4b8da;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .product img {
+      width: 100%;
+      border-radius: 10px;
+      height: 200px;
+      object-fit: cover;
+    }
+    button {
+      background: black;
+      border: none;
+      padding: 10px;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #e68bbe;
+    }
 
-<style>
-body {
-  font-family: Arial;
-  background: #f9f9f9;
-  margin: 0;
-}
+    /* Centered, small order form */
+    .order-form {
+      width: 900px;
+      height: 260px;
+      margin: 40px auto;
+      background: #ff98cb;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .order-form input,
+    .order-form textarea,
+    .order-form button {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+      font-size: 14px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+    .order-form button {
+      background: black;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .order-form button:hover {
+      background: #e68bbe;
+    }
 
-header {
-  background: #ffb6c1;
-  padding: 15px;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-}
+    /* Optional: smaller headings for form */
+    .order-form h2 {
+      text-align: center;
+      color: white;
+    }
 
-.container {
-  padding: 20px;
-  display: flex;
-  gap: 20px;
-  justify-content: center;
+    .order-form h2 {
+  text-align: center;      
+  color: white;          
+  margin-bottom: 15px;   
+  font-size: 20px;        
 }
-
-.product {
-  background: white;
-  padding: 15px;
-  border-radius: 10px;
-  width: 250px;
-  text-align: center;
-}
-
-button {
-  margin-top: 10px;
-  padding: 10px;
-  width: 100%;
-  background: #ff69b4;
-  color: white;
-  border: none;
-  border-radius: 5px;
-}
-
-.cart {
-  background: white;
-  padding: 15px;
-  margin: 20px;
-  border-radius: 10px;
-}
-</style>
+  
+  </style>
 </head>
-
 <body>
 
-<header>🧸 Crochet Toy Shop</header>
+<header>
+  <h1>KNOTIQUE 🧶</h1>
+  <p>Handmade with love</p>
+</header>
 
 <div class="container">
 
-  <div class="product">
-    <h3>Crochet Bear</h3>
-    <select id="bear">
-      <option value="Small - 150">Small - ₱150</option>
-      <option value="Medium - 250">Medium - ₱250</option>
-      <option value="Large - 350">Large - ₱350</option>
-    </select>
-    <button onclick="addToCart('Crochet Bear', 'bear')">Add to Cart</button>
+  <h2>Products</h2>
+  <div class="products">
+    <div class="product">
+      <img src="ph-11134207-7r98t-lmiaqzdhk32n96.jpg" alt="Product 1">
+      <h3>Mushrooms Keychain</h3>
+      <p>₱50</p>
+      <button onclick="selectProduct('Crochet Bag')">Order</button>
+    </div>
+
+    <div class="product">
+      <img src="84984f09-a64f-4071-86ed-bf45872b04e0.jpg" alt="Product 2">
+      <h3>Bunny Keychain</h3>
+      <p>₱120</p>
+      <button onclick="selectProduct('Crochet Hat')">Order</button>
+    </div>
+
+    <div class="product">
+      <img src="620665c8-6ca2-4538-8e10-6c922450e3a8.jpg" alt="Product 3">
+      <h3>Mini Boquet</h3>
+      <p>₱120</p>
+      <button onclick="selectProduct('Amigurumi Toy')">Order</button>
+    </div>
+
+    <div class="product">
+      <img src="82aed3f3-6af5-44e2-88a0-b4a083b1a027.jpg" alt="Product 4">
+      <h3>Sunflower Keychin</h3>
+      <p>₱40</p>
+      <button onclick="selectProduct('Crochet Scarf')">Order</button>
+    </div>
+
+    <div class="product">
+      <img src="348dbac1-55a6-420d-bb54-e3e681495a2b.jpg" alt="Product 5">
+      <h3>Tulips Keychain</h3>
+      <p>₱40</p>
+      <button onclick="selectProduct('Crochet Headband')">Order</button>
+    </div>
   </div>
 
-  <div class="product">
-    <h3>Crochet Bunny</h3>
-    <select id="bunny">
-      <option value="Small - 120">Small - ₱120</option>
-      <option value="Medium - 220">Medium - ₱220</option>
-      <option value="Large - 320">Large - ₱320</option>
-    </select>
-    <button onclick="addToCart('Crochet Bunny', 'bunny')">Add to Cart</button>
-  </div>
+  
+  <form class="order-form" onsubmit="submitOrder(event)">
+  <h2>Order Form</h2>
+  <input type="text" id="name" placeholder="Your Name" required>
+  <input type="text" id="product" placeholder="Selected Product" required>
+  <input type="number" id="quantity" placeholder="Quantity" required>
+  <button type="submit">Submit Order</button>
+</form>
 
 </div>
 
-<div class="cart">
-  <h3>🛒 Cart</h3>
-  <ul id="cartList"></ul>
-  <p><b>Total: ₱<span id="total">0</span></b></p>
+<script>
 
-  <h4>Customer Info</h4>
-  <input type="text" id="name" placeholder="Your Name"><br><br>
-  <input type="text" id="address" placeholder="Address"><br><br>
+  // Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-  <button onclick="placeOrder()">Place Order</button>
-</div>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, addDoc, collection } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDZYMNVHcptSb4opfQROW2-gUUuaffX9Fw",
   authDomain: "crochetshop-dd1bd.firebaseapp.com",
@@ -109,67 +172,20 @@ const firebaseConfig = {
   measurementId: "G-T85N4LCH5D"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-let cart = [];
-let total = 0;
-
-window.addToCart = function(product, selectId) {
-  const value = document.getElementById(selectId).value;
-  const [size, price] = value.split(" - ");
-
-  cart.push({ product, size, price: parseInt(price) });
-  total += parseInt(price);
-
-  displayCart();
-}
-
-function displayCart() {
-  const list = document.getElementById("cartList");
-  list.innerHTML = "";
-
-  cart.forEach(item => {
-    list.innerHTML += `<li>${item.product} (${item.size}) - ₱${item.price}</li>`;
-  });
-
-  document.getElementById("total").innerText = total;
-}
-
-
-window.placeOrder = async function() {
-  const name = document.getElementById("name").value;
-  const address = document.getElementById("address").value;
-
-  if (!name || !address || cart.length === 0) {
-    alert("Complete your order!");
-    return;
+const analytics = getAnalytics(app);
+  
+  function selectProduct(productName) {
+    document.getElementById('product').value = productName;
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 
-  try {
-    await addDoc(collection(db, "orders"), {
-      name: name,
-      address: address,
-      items: cart,
-      total: total,
-      date: new Date().toString()
-    });
-
-    alert("✅ Order saved!");
-
-    
-    cart = [];
-    total = 0;
-    displayCart();
-    document.getElementById("name").value = "";
-    document.getElementById("address").value = "";
-
-  } catch (error) {
-    alert("❌ Error: " + error);
-    console.log(error);
+  function submitOrder(event) {
+    event.preventDefault();
+    alert("Order submitted! We will contact you soon.");
   }
-}
 </script>
 
 </body>
-</html></html>
+</html>
