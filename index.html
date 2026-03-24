@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>KNOTIQUE 🧶</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -48,7 +49,6 @@
       background: #e68bbe;
     }
 
-    /* Centered, small order form */
     .order-form {
       width: 900px;
       height: 260px;
@@ -59,7 +59,6 @@
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
     .order-form input,
-    .order-form textarea,
     .order-form button {
       width: 100%;
       padding: 8px;
@@ -79,21 +78,15 @@
       background: #e68bbe;
     }
 
-    /* Optional: smaller headings for form */
     .order-form h2 {
       text-align: center;
       color: white;
+      margin-bottom: 15px;
+      font-size: 20px;
     }
-
-    .order-form h2 {
-  text-align: center;      
-  color: white;          
-  margin-bottom: 15px;   
-  font-size: 20px;        
-}
-  
   </style>
 </head>
+
 <body>
 
 <header>
@@ -104,87 +97,96 @@
 <div class="container">
 
   <h2>Products</h2>
+
   <div class="products">
+
     <div class="product">
-      <img src="ph-11134207-7r98t-lmiaqzdhk32n96.jpg" alt="Product 1">
+      <img src="ph-11134207-7r98t-lmiaqzdhk32n96.jpg">
       <h3>Mushrooms Keychain</h3>
       <p>₱50</p>
-      <button onclick="selectProduct('Crochet Bag')">Order</button>
+      <button onclick="selectProduct('Mushrooms Keychain')">Order</button>
     </div>
 
     <div class="product">
-      <img src="84984f09-a64f-4071-86ed-bf45872b04e0.jpg" alt="Product 2">
+      <img src="84984f09-a64f-4071-86ed-bf45872b04e0.jpg">
       <h3>Bunny Keychain</h3>
       <p>₱120</p>
-      <button onclick="selectProduct('Crochet Hat')">Order</button>
+      <button onclick="selectProduct('Bunny Keychain')">Order</button>
     </div>
 
     <div class="product">
-      <img src="620665c8-6ca2-4538-8e10-6c922450e3a8.jpg" alt="Product 3">
-      <h3>Mini Boquet</h3>
+      <img src="620665c8-6ca2-4538-8e10-6c922450e3a8.jpg">
+      <h3>Mini Bouquet</h3>
       <p>₱120</p>
-      <button onclick="selectProduct('Amigurumi Toy')">Order</button>
+      <button onclick="selectProduct('Mini Bouquet')">Order</button>
     </div>
 
     <div class="product">
-      <img src="82aed3f3-6af5-44e2-88a0-b4a083b1a027.jpg" alt="Product 4">
-      <h3>Sunflower Keychin</h3>
+      <img src="82aed3f3-6af5-44e2-88a0-b4a083b1a027.jpg">
+      <h3>Sunflower Keychain</h3>
       <p>₱40</p>
-      <button onclick="selectProduct('Crochet Scarf')">Order</button>
+      <button onclick="selectProduct('Sunflower Keychain')">Order</button>
     </div>
 
     <div class="product">
-      <img src="348dbac1-55a6-420d-bb54-e3e681495a2b.jpg" alt="Product 5">
+      <img src="348dbac1-55a6-420d-bb54-e3e681495a2b.jpg">
       <h3>Tulips Keychain</h3>
       <p>₱40</p>
-      <button onclick="selectProduct('Crochet Headband')">Order</button>
+      <button onclick="selectProduct('Tulips Keychain')">Order</button>
     </div>
+
   </div>
 
-  
   <form class="order-form" onsubmit="submitOrder(event)">
-  <h2>Order Form</h2>
-  <input type="text" id="name" placeholder="Your Name" required>
-  <input type="text" id="product" placeholder="Selected Product" required>
-  <input type="number" id="quantity" placeholder="Quantity" required>
-  <button type="submit">Submit Order</button>
-</form>
+    <h2>Order Form</h2>
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="text" id="product" placeholder="Selected Product" required>
+    <input type="number" id="quantity" placeholder="Quantity" required>
+    <button type="submit">Submit Order</button>
+  </form>
 
 </div>
 
-<script>
+<!-- FIREBASE + SCRIPT -->
+<script type="module">
 
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-analytics.js";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyDZYMNVHcptSb4opfQROW2-gUUuaffX9Fw",
-  authDomain: "crochetshop-dd1bd.firebaseapp.com",
-  projectId: "crochetshop-dd1bd",
-  storageBucket: "crochetshop-dd1bd.firebasestorage.app",
-  messagingSenderId: "1060151558141",
-  appId: "1:1060151558141:web:0faca4ff3eaaed48e46394",
-  measurementId: "G-T85N4LCH5D"
-};
+  const firebaseConfig = {
+    apiKey: "AIzaSyDZYMNVHcptSb4opfQROW2-gUUuaffX9Fw",
+    authDomain: "crochetshop-dd1bd.firebaseapp.com",
+    projectId: "crochetshop-dd1bd",
+    storageBucket: "crochetshop-dd1bd.firebasestorage.app",
+    messagingSenderId: "1060151558141",
+    appId: "1:1060151558141:web:0faca4ff3eaaed48e46394",
+    measurementId: "G-T85N4LCH5D"
+  };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-  
-  function selectProduct(productName) {
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  // FUNCTIONS
+  window.selectProduct = function(productName) {
     document.getElementById('product').value = productName;
-    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
   }
 
-  function submitOrder(event) {
+  window.submitOrder = function(event) {
     event.preventDefault();
-    alert("Order submitted! We will contact you soon.");
+
+    const name = document.getElementById('name').value;
+    const product = document.getElementById('product').value;
+    const quantity = document.getElementById('quantity').value;
+
+    console.log("Order:", name, product, quantity);
+
+    alert("Order submitted! (Next step: save to Firebase 🔥)");
   }
+
 </script>
 
 </body>
